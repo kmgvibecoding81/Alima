@@ -1,0 +1,999 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-i18n="meta.title">ТОО «АНПЗ» — надёжный поставщик нефтепродуктов</title>
+<meta name="description" data-i18n-attr="content:meta.desc" content="">
+<meta property="og:title" content="ТОО «АНПЗ»">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0b2545;
+    --navy-2: #13315c;
+    --accent: #1e88e5;
+    --accent-2: #4fb3ff;
+    --bg: #ffffff;
+    --bg-alt: #f3f6fa;
+    --text: #14213d;
+    --muted: #5b6b82;
+    --line: #dde4ee;
+    --card: #ffffff;
+    --ok: #1b8a5a;
+    --err: #c62828;
+    --radius: 14px;
+    --shadow: 0 6px 24px rgba(11, 37, 69, .08);
+    --container: 1200px;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+  body {
+    margin: 0; font-family: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+    color: var(--text); background: var(--bg); line-height: 1.6; font-size: 16px;
+  }
+  img, svg { display: block; max-width: 100%; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  :focus-visible { outline: 3px solid var(--accent-2); outline-offset: 2px; }
+  .container { max-width: var(--container); margin: 0 auto; padding: 0 16px; }
+  section { padding: 88px 0; }
+  .alt { background: var(--bg-alt); }
+  h1, h2, h3 { line-height: 1.2; margin: 0 0 16px; }
+  h2 { font-size: clamp(26px, 3.2vw, 38px); font-weight: 800; color: var(--navy); }
+  .eyebrow { color: var(--accent); font-weight: 700; text-transform: uppercase; letter-spacing: .08em; font-size: 13px; margin-bottom: 8px; }
+  .lead { color: var(--muted); font-size: 18px; max-width: 720px; margin: 0 0 40px; }
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    padding: 14px 26px; border-radius: 10px; font-weight: 600; font-size: 16px;
+    border: 2px solid transparent; cursor: pointer; transition: .2s; font-family: inherit;
+  }
+  .btn:hover { text-decoration: none; transform: translateY(-1px); }
+  .btn-primary { background: var(--accent); color: #fff; }
+  .btn-primary:hover { background: #1670c4; }
+  .btn-ghost { border-color: rgba(255,255,255,.6); color: #fff; background: transparent; }
+  .btn-ghost:hover { background: rgba(255,255,255,.12); }
+  .btn-outline { border-color: var(--accent); color: var(--accent); background: transparent; padding: 10px 18px; font-size: 14px; }
+  .btn-outline:hover { background: var(--accent); color: #fff; }
+
+  /* Header */
+  header.site {
+    position: sticky; top: 0; z-index: 50; background: rgba(255,255,255,.96);
+    backdrop-filter: blur(8px); border-bottom: 1px solid var(--line);
+  }
+  .hdr { display: flex; align-items: center; gap: 24px; height: 72px; }
+  .logo { display: flex; align-items: center; gap: 10px; font-weight: 800; color: var(--navy); font-size: 20px; white-space: nowrap; }
+  .logo:hover { text-decoration: none; }
+  .logo-mark { width: 38px; height: 38px; border-radius: 9px; background: linear-gradient(135deg, var(--navy), var(--accent)); display: grid; place-items: center; }
+  .logo small { display: block; font-size: 11px; font-weight: 500; color: var(--muted); letter-spacing: .02em; }
+  nav.main { display: flex; gap: 22px; margin-left: auto; }
+  nav.main a { color: var(--text); font-weight: 500; font-size: 15px; white-space: nowrap; }
+  nav.main a:hover { color: var(--accent); text-decoration: none; }
+  .lang { display: flex; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+  .lang button { border: 0; background: transparent; padding: 7px 10px; font: 600 13px Inter, sans-serif; cursor: pointer; color: var(--muted); }
+  .lang button[aria-pressed="true"] { background: var(--navy); color: #fff; }
+  .hdr .btn-primary { padding: 10px 18px; font-size: 14px; }
+  .burger { display: none; background: none; border: 0; padding: 8px; cursor: pointer; color: var(--navy); }
+
+  /* Hero */
+  .hero {
+    position: relative; color: #fff; padding: 120px 0 140px; overflow: hidden;
+    background: radial-gradient(1200px 500px at 85% 10%, rgba(79,179,255,.35), transparent 60%),
+                linear-gradient(160deg, #071a33 0%, var(--navy) 45%, var(--navy-2) 100%);
+  }
+  .hero .plant { position: absolute; right: 0; bottom: 0; width: min(900px, 90%); opacity: .22; pointer-events: none; }
+  .hero-inner { position: relative; max-width: 760px; }
+  .badge { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; border-radius: 999px; background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.2); font-size: 14px; margin-bottom: 24px; }
+  .badge::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--accent-2); }
+  .hero h1 { font-size: clamp(34px, 5.4vw, 60px); font-weight: 800; letter-spacing: -.02em; }
+  .hero p { font-size: clamp(17px, 2vw, 21px); color: #c9d6ea; margin: 0 0 36px; }
+  .hero .actions { display: flex; flex-wrap: wrap; gap: 14px; }
+
+  /* Stats */
+  .stats { margin-top: -70px; position: relative; z-index: 2; padding: 0; }
+  .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); background: var(--card); border-radius: var(--radius); box-shadow: var(--shadow); }
+  .stat { padding: 30px 26px; border-right: 1px solid var(--line); }
+  .stat:last-child { border-right: 0; }
+  .stat .num { font-size: clamp(30px, 3.6vw, 42px); font-weight: 800; color: var(--navy); line-height: 1.1; }
+  .stat .num span.u { font-size: .55em; color: var(--accent); margin-left: 4px; }
+  .stat .lbl { color: var(--muted); font-size: 14px; margin-top: 6px; }
+  .stats-note { color: var(--muted); font-size: 12px; margin-top: 10px; }
+
+  /* About */
+  .about-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 56px; align-items: center; }
+  .about-visual { border-radius: var(--radius); aspect-ratio: 4/3; background: linear-gradient(135deg, var(--navy), var(--accent)); display: grid; place-items: center; color: rgba(255,255,255,.85); position: relative; overflow: hidden; }
+  .about-visual span { position: absolute; bottom: 14px; left: 16px; font-size: 12px; opacity: .7; }
+  .about-list { list-style: none; padding: 0; margin: 24px 0; display: grid; gap: 10px; }
+  .about-list li { display: flex; gap: 10px; }
+  .about-list li::before { content: "✓"; color: var(--accent); font-weight: 800; }
+
+  /* Cards */
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 28px; display: flex; flex-direction: column; transition: .2s; }
+  .card:hover { box-shadow: var(--shadow); border-color: transparent; transform: translateY(-3px); }
+  .card .ico { width: 52px; height: 52px; border-radius: 12px; background: #e8f2fd; color: var(--accent); display: grid; place-items: center; margin-bottom: 18px; }
+  .card h3 { font-size: 19px; color: var(--navy); margin-bottom: 8px; }
+  .card p { color: var(--muted); margin: 0 0 20px; font-size: 15px; flex: 1; }
+  .card .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+  .card .tags span { font-size: 12px; background: var(--bg-alt); border: 1px solid var(--line); padding: 3px 9px; border-radius: 999px; color: var(--text); }
+  .card .btn-outline { align-self: flex-start; }
+  .price-note { display: flex; gap: 10px; align-items: center; background: #e8f2fd; color: var(--navy-2); padding: 12px 16px; border-radius: 10px; font-size: 14px; margin-top: 28px; }
+
+  /* Services */
+  .services { background: var(--navy); color: #fff; }
+  .services h2 { color: #fff; }
+  .services .lead { color: #c9d6ea; }
+  .svc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+  .svc { border: 1px solid rgba(255,255,255,.15); border-radius: var(--radius); padding: 28px; background: rgba(255,255,255,.04); }
+  .svc .n { font-size: 14px; color: var(--accent-2); font-weight: 700; margin-bottom: 10px; }
+  .svc h3 { font-size: 19px; }
+  .svc p { color: #c9d6ea; margin: 0; font-size: 15px; }
+
+  /* Advantages */
+  .adv-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 18px; }
+  .adv { padding: 24px 20px; border-radius: var(--radius); background: var(--card); border: 1px solid var(--line); }
+  .adv .ico { color: var(--accent); margin-bottom: 14px; }
+  .adv h3 { font-size: 17px; color: var(--navy); margin-bottom: 6px; }
+  .adv p { font-size: 14px; color: var(--muted); margin: 0; }
+
+  /* Partners */
+  .partners { display: grid; grid-template-columns: repeat(6, 1fr); gap: 16px; }
+  .partner { height: 84px; border: 1px dashed var(--line); border-radius: 12px; display: grid; place-items: center; color: #9aa8bb; font-weight: 600; font-size: 13px; background: var(--card); }
+  .note { color: var(--muted); font-size: 13px; margin-top: 16px; }
+
+  /* News */
+  .news-head { display: flex; justify-content: space-between; align-items: end; gap: 16px; flex-wrap: wrap; margin-bottom: 32px; }
+  .news-head .lead { margin: 0; }
+  .news-card { padding: 0; overflow: hidden; }
+  .news-card .thumb { aspect-ratio: 16/9; background: linear-gradient(135deg, #cfdcec, #e9eff7); display: grid; place-items: center; color: #8597ae; }
+  .news-card .body { padding: 22px 24px 26px; display: flex; flex-direction: column; flex: 1; }
+  .news-card time { font-size: 13px; color: var(--accent); font-weight: 600; margin-bottom: 8px; }
+
+  /* FAQ */
+  .faq { max-width: 860px; }
+  .faq details { border: 1px solid var(--line); border-radius: 12px; background: var(--card); margin-bottom: 12px; }
+  .faq summary { cursor: pointer; list-style: none; padding: 20px 56px 20px 22px; font-weight: 600; color: var(--navy); position: relative; }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary::after { content: "+"; position: absolute; right: 22px; top: 50%; transform: translateY(-50%); font-size: 24px; color: var(--accent); transition: .2s; }
+  .faq details[open] summary::after { transform: translateY(-50%) rotate(45deg); }
+  .faq details p { margin: 0; padding: 0 22px 20px; color: var(--muted); }
+
+  /* Form */
+  .form-wrap { display: grid; grid-template-columns: .8fr 1.2fr; gap: 48px; align-items: start; }
+  .contact-list { list-style: none; padding: 0; margin: 28px 0 0; display: grid; gap: 16px; }
+  .contact-list li { display: flex; gap: 14px; align-items: flex-start; }
+  .contact-list .ico { flex: none; width: 40px; height: 40px; border-radius: 10px; background: #e8f2fd; color: var(--accent); display: grid; place-items: center; }
+  .contact-list b { display: block; font-size: 13px; color: var(--muted); font-weight: 500; }
+  .tbd { color: #a0670b; background: #fff5e0; border-radius: 4px; padding: 0 4px; font-size: .92em; }
+  form.req { background: var(--card); border-radius: var(--radius); box-shadow: var(--shadow); padding: 34px; display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  .field { display: flex; flex-direction: column; gap: 6px; }
+  .field.full { grid-column: 1 / -1; }
+  .field label { font-size: 14px; font-weight: 600; color: var(--navy); }
+  .field label .req-mark { color: var(--err); }
+  .field input, .field select, .field textarea {
+    font: inherit; font-size: 15px; padding: 12px 14px; border: 1px solid var(--line); border-radius: 9px;
+    background: #fff; color: var(--text); width: 100%;
+  }
+  .field textarea { min-height: 96px; resize: vertical; }
+  .field input:focus, .field select:focus, .field textarea:focus { border-color: var(--accent); outline: 3px solid rgba(30,136,229,.18); }
+  .field.invalid input, .field.invalid select { border-color: var(--err); }
+  .field .err { color: var(--err); font-size: 13px; min-height: 0; display: none; }
+  .field.invalid .err { display: block; }
+  .check { display: flex; gap: 10px; align-items: flex-start; font-size: 14px; color: var(--muted); }
+  .check input { width: 18px; height: 18px; margin-top: 2px; flex: none; accent-color: var(--accent); }
+  .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+  .success { grid-column: 1 / -1; display: none; background: #e6f6ee; color: var(--ok); border-radius: 10px; padding: 18px; font-weight: 600; text-align: center; }
+  .success.show { display: block; }
+  .map { margin-top: 28px; border-radius: var(--radius); aspect-ratio: 16/9; background: repeating-linear-gradient(45deg, #e9eff7, #e9eff7 12px, #f3f6fa 12px, #f3f6fa 24px); display: grid; place-items: center; color: var(--muted); font-size: 14px; border: 1px solid var(--line); text-align: center; padding: 16px; }
+
+  /* Footer */
+  footer { background: #071a33; color: #a9b8cf; padding: 64px 0 28px; font-size: 14px; }
+  .foot-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 32px; }
+  footer h4 { color: #fff; margin: 0 0 14px; font-size: 15px; }
+  footer ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
+  footer a { color: #a9b8cf; }
+  footer a:hover { color: #fff; }
+  footer .logo { color: #fff; }
+  footer .logo small { color: #a9b8cf; }
+  .foot-bottom { border-top: 1px solid rgba(255,255,255,.1); margin-top: 40px; padding-top: 22px; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+
+  /* Cookie + quick contact */
+  .cookie { position: fixed; left: 16px; right: 16px; bottom: 16px; max-width: 560px; background: var(--navy); color: #fff; border-radius: 12px; padding: 18px 20px; box-shadow: 0 10px 40px rgba(0,0,0,.25); z-index: 60; display: none; font-size: 14px; }
+  .cookie.show { display: block; }
+  .cookie .row { display: flex; gap: 10px; margin-top: 12px; flex-wrap: wrap; }
+  .cookie button { padding: 9px 16px; font-size: 14px; }
+  .cookie .btn-ghost { border-width: 1px; }
+  .quick { display: none; position: fixed; right: 16px; bottom: 16px; z-index: 55; flex-direction: column; gap: 10px; }
+  .quick a { width: 52px; height: 52px; border-radius: 50%; display: grid; place-items: center; color: #fff; box-shadow: var(--shadow); }
+  .quick .tel { background: var(--accent); }
+  .quick .wa { background: #25a35a; }
+
+  /* Reveal */
+  .reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
+  .reveal.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; transition: none; }
+    html { scroll-behavior: auto; }
+  }
+
+  /* Responsive */
+  @media (max-width: 1100px) {
+    .adv-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (max-width: 1180px) {
+    nav.main { display: none; position: absolute; top: 72px; left: 0; right: 0; background: #fff; flex-direction: column; gap: 0; border-bottom: 1px solid var(--line); padding: 8px 16px 16px; }
+    nav.main.open { display: flex; }
+    nav.main a { padding: 12px 0; border-bottom: 1px solid var(--line); font-size: 16px; }
+    .burger { display: block; }
+    .lang { margin-left: auto; }
+  }
+  @media (max-width: 960px) {
+    .hdr { gap: 12px; }
+    .hdr .btn-primary { display: none; }
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    .stat:nth-child(2) { border-right: 0; }
+    .stat:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
+    .about-grid, .form-wrap { grid-template-columns: 1fr; gap: 36px; }
+    .grid-3, .svc-grid { grid-template-columns: repeat(2, 1fr); }
+    .partners { grid-template-columns: repeat(3, 1fr); }
+    .foot-grid { grid-template-columns: 1fr 1fr; }
+    .quick { display: flex; }
+    .cookie { right: 84px; }
+  }
+  @media (max-width: 620px) {
+    section { padding: 64px 0; }
+    .hero { padding: 80px 0 120px; }
+    .hero .actions .btn { width: 100%; }
+    .grid-3, .svc-grid, .adv-grid { grid-template-columns: 1fr; }
+    .partners { grid-template-columns: repeat(2, 1fr); }
+    form.req { grid-template-columns: 1fr; padding: 22px; }
+    .foot-grid { grid-template-columns: 1fr; }
+    .stat { padding: 22px 18px; }
+    .logo small { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="container hdr">
+    <a href="#top" class="logo" aria-label="ТОО «АНПЗ»">
+      <span class="logo-mark" aria-hidden="true">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5c3.5 4.4 6 7.9 6 11a6 6 0 0 1-12 0c0-3.1 2.5-6.6 6-11z"/></svg>
+      </span>
+      <span>АНПЗ<small data-i18n="brand.sub">Атырауский НПЗ</small></span>
+    </a>
+    <nav class="main" id="nav" aria-label="Main">
+      <a href="#about" data-i18n="nav.about">О компании</a>
+      <a href="#products" data-i18n="nav.products">Продукция</a>
+      <a href="#services" data-i18n="nav.services">Услуги</a>
+      <a href="#advantages" data-i18n="nav.advantages">Преимущества</a>
+      <a href="#news" data-i18n="nav.news">Пресс-центр</a>
+      <a href="#faq" data-i18n="nav.faq">FAQ</a>
+      <a href="#contacts" data-i18n="nav.contacts">Контакты</a>
+    </nav>
+    <div class="lang" role="group" aria-label="Language">
+      <button type="button" data-lang="ru" aria-pressed="true">RU</button>
+      <button type="button" data-lang="kk" aria-pressed="false">KZ</button>
+      <button type="button" data-lang="en" aria-pressed="false">EN</button>
+    </div>
+    <a href="#request" class="btn btn-primary" data-i18n="cta.request">Оставить заявку</a>
+    <button class="burger" id="burger" aria-label="Menu" aria-expanded="false" aria-controls="nav">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+  </div>
+</header>
+
+<main id="top">
+  <!-- HERO -->
+  <section class="hero">
+    <svg class="plant" viewBox="0 0 900 360" fill="none" stroke="#9fd2ff" stroke-width="2" aria-hidden="true">
+      <path d="M0 360V300h60v-40h40v40h30V180h26v120h40V120h30v180h50v-60h70v60h40V60h22v240h40v-90h34v90h50V150h40v150h60v-80h50v80h40V200h28v100h60v60z"/>
+      <path d="M156 180c0-30 26-30 26-60M220 120c0-25 30-25 30-50M383 60c0-20 22-20 22-40M640 150c0-24 40-24 40-48"/>
+      <circle cx="560" cy="250" r="40"/><circle cx="560" cy="250" r="22"/>
+      <path d="M0 330h900"/>
+    </svg>
+    <div class="container hero-inner">
+      <div class="badge" data-i18n="hero.badge">Экологический класс К4/К5</div>
+      <h1 data-i18n="hero.title">Надёжный поставщик нефтепродуктов в Казахстане</h1>
+      <p data-i18n="hero.sub">Переработка нефти по стандартам К4/К5. Поставки для B2B-клиентов.</p>
+      <div class="actions">
+        <a href="#request" class="btn btn-primary" data-i18n="cta.request">Оставить заявку</a>
+        <a href="#products" class="btn btn-ghost" data-i18n="cta.catalog">Каталог продукции</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="stats" aria-label="Key figures">
+    <div class="container">
+      <div class="stats-grid reveal">
+        <div class="stat"><div class="num"><span class="count" data-to="5.5" data-dec="1">0</span><span class="u" data-i18n="stats.u1">млн т</span></div><div class="lbl" data-i18n="stats.l1">мощность переработки нефти в год</div></div>
+        <div class="stat"><div class="num"><span class="count" data-to="87">0</span><span class="u">%</span></div><div class="lbl" data-i18n="stats.l2">глубина переработки</div></div>
+        <div class="stat"><div class="num"><span class="count" data-to="80">0</span><span class="u">+</span></div><div class="lbl" data-i18n="stats.l3">лет работы (с 1945 года)</div></div>
+        <div class="stat"><div class="num"><span class="count" data-to="20">0</span><span class="u">+</span></div><div class="lbl" data-i18n="stats.l4">видов продукции</div></div>
+      </div>
+      <p class="stats-note" data-i18n="stats.note">* Показатели предварительные и подлежат уточнению у заказчика.</p>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="container about-grid">
+      <div class="reveal">
+        <div class="eyebrow" data-i18n="about.eyebrow">О компании</div>
+        <h2 data-i18n="about.title">Один из ключевых нефтеперерабатывающих заводов Казахстана</h2>
+        <p class="lead" style="margin-bottom:0" data-i18n="about.text">ТОО «АНПЗ» перерабатывает нефть и выпускает моторное топливо, сжиженный газ и нефтехимическую продукцию. Модернизированные установки глубокой переработки позволяют производить топливо экологических классов К4/К5.</p>
+        <ul class="about-list">
+          <li data-i18n="about.li1">Миссия и ценности: безопасность, качество, ответственность</li>
+          <li data-i18n="about.li2">История завода: от запуска до модернизации</li>
+          <li data-i18n="about.li3">Производственные мощности и технологические установки</li>
+        </ul>
+        <a href="#about" class="btn btn-outline" data-i18n="about.link">Подробнее о компании →</a>
+      </div>
+      <div class="about-visual reveal" aria-hidden="true">
+        <svg width="140" height="140" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M2 21h20M4 21V10l4 2V8l4 2V6l4 2v13M18 21V4h2v17M7 16h2M11 16h2"/></svg>
+        <span data-i18n="about.photo">Фото завода — заглушка</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUCTS -->
+  <section id="products" class="alt">
+    <div class="container">
+      <div class="eyebrow" data-i18n="products.eyebrow">Продукция</div>
+      <h2 data-i18n="products.title">Каталог нефтепродуктов</h2>
+      <p class="lead" data-i18n="products.sub">Продукция соответствует ГОСТ и СТ РК. На каждую партию выдаётся паспорт качества.</p>
+      <div class="grid-3">
+        <article class="card reveal">
+          <div class="ico"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V5a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v16M3 21h12M6 8h6M14 10h2a2 2 0 0 1 2 2v4a1.5 1.5 0 0 0 3 0V9l-3-3"/></svg></div>
+          <h3 data-i18n="p1.name">Автомобильные бензины</h3>
+          <div class="tags"><span>АИ-92</span><span>АИ-95</span><span>АИ-98</span><span>К4/К5</span></div>
+          <p data-i18n="p1.desc">Высокооктановые бензины для легкового и коммерческого транспорта.</p>
+          <a href="#request" class="btn btn-outline" data-product="gasoline" data-i18n="cta.price">Запросить цену</a>
+        </article>
+        <article class="card reveal">
+          <div class="ico"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1 17h2m4 0h8m4 0h2M3 17V8h11v9M14 11h4l3 3v3"/><circle cx="5" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg></div>
+          <h3 data-i18n="p2.name">Дизельное топливо</h3>
+          <div class="tags"><span data-i18n="p2.t1">Летнее</span><span data-i18n="p2.t2">Межсезонное</span><span data-i18n="p2.t3">Зимнее</span></div>
+          <p data-i18n="p2.desc">Для грузового транспорта, спецтехники и сельского хозяйства в любой сезон.</p>
+          <a href="#request" class="btn btn-outline" data-product="diesel" data-i18n="cta.price">Запросить цену</a>
+        </article>
+        <article class="card reveal">
+          <div class="ico"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/></svg></div>
+          <h3 data-i18n="p3.name">Авиатопливо</h3>
+          <div class="tags"><span data-i18n="p3.t1">Реактивное топливо</span></div>
+          <p data-i18n="p3.desc">Топливо для реактивных двигателей гражданской авиации.</p>
+          <a href="#request" class="btn btn-outline" data-product="jet" data-i18n="cta.price">Запросить цену</a>
+        </article>
+        <article class="card reveal">
+          <div class="ico"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="5" width="12" height="16" rx="6"/><path d="M10 5V3h4v2M6 13h12"/></svg></div>
+          <h3 data-i18n="p4.name">Сжиженный углеводородный газ</h3>
+          <div class="tags"><span data-i18n="p4.t1">Пропан</span><span data-i18n="p4.t2">Пропан-бутан</span></div>
+          <p data-i18n="p4.desc">Для коммунально-бытовых нужд, автотранспорта и промышленности.</p>
+          <a href="#request" class="btn btn-outline" data-product="lpg" data-i18n="cta.price">Запросить цену</a>
+        </article>
+        <article class="card reveal">
+          <div class="ico"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 1.7 3h10.6a2 2 0 0 0 1.7-3l-5-9V3M7 15h10"/></svg></div>
+          <h3 data-i18n="p5.name">Нефтехимия</h3>
+          <div class="tags"><span data-i18n="p5.t1">Бензол</span><span data-i18n="p5.t2">Параксилол</span></div>
+          <p data-i18n="p5.desc">Ароматические углеводороды — сырьё для химической промышленности.</p>
+          <a href="#request" class="btn btn-outline" data-product="petrochem" data-i18n="cta.price">Запросить цену</a>
+        </article>
+        <article class="card reveal">
+          <div class="ico"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8 12 3 3 8v8l9 5 9-5zM3 8l9 5 9-5M12 13v8"/></svg></div>
+          <h3 data-i18n="p6.name">Прочая продукция</h3>
+          <div class="tags"><span data-i18n="p6.t1">Нефтяной кокс</span><span data-i18n="p6.t2">Сера</span><span data-i18n="p6.t3">Мазут</span><span data-i18n="p6.t4">Вакуумный газойль</span></div>
+          <p data-i18n="p6.desc">Сопутствующие продукты переработки для промышленных потребителей.</p>
+          <a href="#request" class="btn btn-outline" data-product="other" data-i18n="cta.price">Запросить цену</a>
+        </article>
+      </div>
+      <div class="price-note">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+        <span data-i18n="products.price">Цены на сайте не публикуются: стоимость определяется договором и рыночными условиями.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services" class="services">
+    <div class="container">
+      <div class="eyebrow" style="color:var(--accent-2)" data-i18n="services.eyebrow">Услуги</div>
+      <h2 data-i18n="services.title">Переработка давальческого сырья</h2>
+      <p class="lead" data-i18n="services.sub">Для нефтедобывающих компаний — полный цикл: от приёма сырья до отгрузки готовой продукции.</p>
+      <div class="svc-grid">
+        <div class="svc reveal"><div class="n">01</div><h3 data-i18n="s1.t">Процессинг нефти</h3><p data-i18n="s1.d">Переработка давальческой нефти на мощностях завода по согласованной схеме.</p></div>
+        <div class="svc reveal"><div class="n">02</div><h3 data-i18n="s2.t">Хранение</h3><p data-i18n="s2.d">Резервуарный парк для хранения сырья и готовых нефтепродуктов.</p></div>
+        <div class="svc reveal"><div class="n">03</div><h3 data-i18n="s3.t">Отгрузка</h3><p data-i18n="s3.d">Отгрузка железнодорожным и автомобильным транспортом.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ADVANTAGES -->
+  <section id="advantages">
+    <div class="container">
+      <div class="eyebrow" data-i18n="adv.eyebrow">Преимущества</div>
+      <h2 data-i18n="adv.title">Почему с нами работают</h2>
+      <p class="lead" data-i18n="adv.sub">Пять причин выбрать ТОО «АНПЗ» как долгосрочного партнёра.</p>
+      <div class="adv-grid">
+        <div class="adv reveal"><div class="ico"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 0 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 0 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 0 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 0 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg></div><h3 data-i18n="a1.t">Современное производство</h3><p data-i18n="a1.d">Модернизированные установки глубокой переработки.</p></div>
+        <div class="adv reveal"><div class="ico"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.5 19 2c1 2 2 4.2 2 8 0 5.5-4.8 10-10 10z"/><path d="M2 21c0-3 1.9-5.4 5.1-6"/></svg></div><h3 data-i18n="a2.t">Экологичное топливо</h3><p data-i18n="a2.d">Продукция экологических классов К4/К5.</p></div>
+        <div class="adv reveal"><div class="ico"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18M7 14l4-4 4 4 5-5"/></svg></div><h3 data-i18n="a3.t">Стабильные объёмы</h3><p data-i18n="a3.d">Бесперебойные поставки по долгосрочным договорам.</p></div>
+        <div class="adv reveal"><div class="ico"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg></div><h3 data-i18n="a4.t">Контроль качества</h3><p data-i18n="a4.d">Аккредитованная лаборатория, паспорт на каждую партию.</p></div>
+        <div class="adv reveal"><div class="ico"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="13" rx="2"/><path d="M4 11h16M8 21l-2 0M16 21h2M8 16l-2 5M16 16l2 5"/></svg></div><h3 data-i18n="a5.t">Логистика</h3><p data-i18n="a5.d">Собственная инфраструктура отгрузки.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PARTNERS -->
+  <section class="alt" aria-labelledby="partners-h">
+    <div class="container">
+      <div class="eyebrow" data-i18n="partners.eyebrow">Партнёры</div>
+      <h2 id="partners-h" data-i18n="partners.title">Нам доверяют</h2>
+      <div class="partners">
+        <div class="partner" data-i18n="partners.logo">Логотип</div>
+        <div class="partner" data-i18n="partners.logo">Логотип</div>
+        <div class="partner" data-i18n="partners.logo">Логотип</div>
+        <div class="partner" data-i18n="partners.logo">Логотип</div>
+        <div class="partner" data-i18n="partners.logo">Логотип</div>
+        <div class="partner" data-i18n="partners.logo">Логотип</div>
+      </div>
+      <p class="note" data-i18n="partners.note">Логотипы партнёров и кейсы публикуются только с согласия клиентов.</p>
+    </div>
+  </section>
+
+  <!-- NEWS -->
+  <section id="news">
+    <div class="container">
+      <div class="news-head">
+        <div>
+          <div class="eyebrow" data-i18n="news.eyebrow">Пресс-центр</div>
+          <h2 data-i18n="news.title">Последние новости</h2>
+          <p class="lead" data-i18n="news.sub">Новости завода, экология и раскрытие информации.</p>
+        </div>
+        <a href="#news" class="btn btn-outline" data-i18n="news.all">Все новости →</a>
+      </div>
+      <div class="grid-3">
+        <article class="card news-card reveal">
+          <div class="thumb" aria-hidden="true"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="m21 16-5-5-9 9"/></svg></div>
+          <div class="body"><time data-i18n="n.cat1">Производство</time><h3 data-i18n="n.t1">Заголовок новости (наполняется из CMS)</h3><p data-i18n="n.d">Краткий анонс новости — 1–2 предложения.</p><a href="#news" data-i18n="n.more">Читать далее →</a></div>
+        </article>
+        <article class="card news-card reveal">
+          <div class="thumb" aria-hidden="true"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="m21 16-5-5-9 9"/></svg></div>
+          <div class="body"><time data-i18n="n.cat2">Экология</time><h3 data-i18n="n.t1">Заголовок новости (наполняется из CMS)</h3><p data-i18n="n.d">Краткий анонс новости — 1–2 предложения.</p><a href="#news" data-i18n="n.more">Читать далее →</a></div>
+        </article>
+        <article class="card news-card reveal">
+          <div class="thumb" aria-hidden="true"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="m21 16-5-5-9 9"/></svg></div>
+          <div class="body"><time data-i18n="n.cat3">Закупки</time><h3 data-i18n="n.t1">Заголовок новости (наполняется из CMS)</h3><p data-i18n="n.d">Краткий анонс новости — 1–2 предложения.</p><a href="#news" data-i18n="n.more">Читать далее →</a></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="alt">
+    <div class="container">
+      <div class="eyebrow">FAQ</div>
+      <h2 data-i18n="faq.title">Частые вопросы</h2>
+      <div class="faq">
+        <details><summary data-i18n="q1">Как заключить договор на поставку нефтепродуктов?</summary><p data-i18n="a1">Оставьте заявку через форму на сайте. Коммерческий отдел свяжется с вами, запросит пакет документов и согласует условия поставки.</p></details>
+        <details><summary data-i18n="q2">Какие минимальные объёмы поставки?</summary><p data-i18n="a2">Минимальный объём зависит от вида продукции и способа отгрузки. Уточните его у коммерческого отдела.</p></details>
+        <details><summary data-i18n="q3">Где получить паспорт качества продукции?</summary><p data-i18n="a3">Паспорт качества выдаётся на каждую партию. Образцы паспортов доступны в разделе «Качество и сертификаты».</p></details>
+        <details><summary data-i18n="q4">Какие способы отгрузки доступны?</summary><p data-i18n="a4">Железнодорожный и автомобильный транспорт.</p></details>
+        <details><summary data-i18n="q5">Принимаете ли нефть на давальческую переработку?</summary><p data-i18n="a5">Да. Условия процессинга обсуждаются индивидуально — выберите в форме услугу «Переработка давальческого сырья».</p></details>
+        <details><summary data-i18n="q6">Как стать поставщиком завода и участвовать в закупках?</summary><p data-i18n="a6">Закупки проводятся через закупочную площадку. Требования к поставщикам опубликованы в разделе «Закупки».</p></details>
+        <details><summary data-i18n="q7">Как быстро обрабатывается заявка?</summary><p data-i18n="a7">Мы связываемся с вами в течение 1 рабочего дня после получения заявки.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- REQUEST + CONTACTS -->
+  <section id="contacts">
+    <div class="container form-wrap" id="request">
+      <div>
+        <div class="eyebrow" data-i18n="form.eyebrow">Заявка</div>
+        <h2 data-i18n="form.title">Оставьте B2B-заявку</h2>
+        <p class="lead" style="margin:0" data-i18n="form.sub">Укажите продукт и ориентировочный объём — коммерческий отдел подготовит предложение.</p>
+        <ul class="contact-list">
+          <li><span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span><div><b data-i18n="c.addr">Адрес</b><span data-i18n="c.addrv">г. Атырау</span>, <span class="tbd" data-i18n="tbd">уточнить</span></div></li>
+          <li><span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg></span><div><b data-i18n="c.phone">Приёмная / коммерческий отдел</b><span class="tbd" data-i18n="tbd">уточнить</span></div></li>
+          <li><span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg></span><div><b>Email</b><span class="tbd" data-i18n="tbd">уточнить</span></div></li>
+          <li><span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 21l2-5.4A8.4 8.4 0 1 1 21 11.5z"/></svg></span><div><b data-i18n="c.msg">Мессенджеры</b>WhatsApp / Telegram — <span class="tbd" data-i18n="tbd">уточнить</span></div></li>
+        </ul>
+        <div class="map" data-i18n="c.map">Интерактивная карта (2GIS / Яндекс Карты)</div>
+      </div>
+
+      <form class="req" id="reqForm" novalidate>
+        <div class="field">
+          <label for="f-company"><span data-i18n="f.company">Название компании</span> <span class="req-mark">*</span></label>
+          <input id="f-company" name="company" autocomplete="organization" required>
+          <span class="err" data-i18n="e.required">Заполните поле</span>
+        </div>
+        <div class="field">
+          <label for="f-bin" data-i18n="f.bin">БИН</label>
+          <input id="f-bin" name="bin" inputmode="numeric" maxlength="12" placeholder="000000000000">
+          <span class="err" data-i18n="e.bin">БИН должен состоять из 12 цифр</span>
+        </div>
+        <div class="field">
+          <label for="f-person"><span data-i18n="f.person">Контактное лицо</span> <span class="req-mark">*</span></label>
+          <input id="f-person" name="person" autocomplete="name" required>
+          <span class="err" data-i18n="e.required">Заполните поле</span>
+        </div>
+        <div class="field">
+          <label for="f-phone"><span data-i18n="f.phone">Телефон</span> <span class="req-mark">*</span></label>
+          <input id="f-phone" name="phone" type="tel" autocomplete="tel" placeholder="+7 (___) ___-__-__" required>
+          <span class="err" data-i18n="e.phone">Введите номер полностью</span>
+        </div>
+        <div class="field">
+          <label for="f-email"><span>Email</span> <span class="req-mark">*</span></label>
+          <input id="f-email" name="email" type="email" autocomplete="email" required>
+          <span class="err" data-i18n="e.email">Введите корректный email</span>
+        </div>
+        <div class="field">
+          <label for="f-product"><span data-i18n="f.product">Продукт / услуга</span> <span class="req-mark">*</span></label>
+          <select id="f-product" name="product" required>
+            <option value="" data-i18n="o.choose">— Выберите —</option>
+            <option value="gasoline" data-i18n="p1.name">Автомобильные бензины</option>
+            <option value="diesel" data-i18n="p2.name">Дизельное топливо</option>
+            <option value="jet" data-i18n="p3.name">Авиатопливо</option>
+            <option value="lpg" data-i18n="p4.name">Сжиженный углеводородный газ</option>
+            <option value="petrochem" data-i18n="p5.name">Нефтехимия</option>
+            <option value="other" data-i18n="p6.name">Прочая продукция</option>
+            <option value="processing" data-i18n="services.title">Переработка давальческого сырья</option>
+          </select>
+          <span class="err" data-i18n="e.select">Выберите вариант</span>
+        </div>
+        <div class="field full">
+          <label for="f-volume" data-i18n="f.volume">Ориентировочный объём (т/мес)</label>
+          <input id="f-volume" name="volume" type="number" min="0" step="1">
+        </div>
+        <div class="field full">
+          <label for="f-comment" data-i18n="f.comment">Комментарий</label>
+          <textarea id="f-comment" name="comment"></textarea>
+        </div>
+        <div class="hp" aria-hidden="true"><label>Website<input name="website" tabindex="-1" autocomplete="off"></label></div>
+        <div class="field full">
+          <label class="check"><input type="checkbox" id="f-consent" name="consent" required><span data-i18n="f.consent">Я согласен на обработку персональных данных в соответствии с политикой конфиденциальности</span></label>
+          <span class="err" data-i18n="e.consent">Необходимо согласие</span>
+        </div>
+        <div class="field full">
+          <button type="submit" class="btn btn-primary" data-i18n="f.submit">Отправить заявку</button>
+        </div>
+        <div class="success" id="success" role="status" data-i18n="f.success">Спасибо! Мы свяжемся с вами в течение 1 рабочего дня.</div>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="foot-grid">
+      <div>
+        <a href="#top" class="logo">
+          <span class="logo-mark" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5c3.5 4.4 6 7.9 6 11a6 6 0 0 1-12 0c0-3.1 2.5-6.6 6-11z"/></svg></span>
+          <span>АНПЗ<small data-i18n="brand.sub">Атырауский НПЗ</small></span>
+        </a>
+        <p data-i18n="foot.about" style="margin-top:16px">ТОО «Атырауский нефтеперерабатывающий завод» — переработка нефти и выпуск нефтепродуктов.</p>
+        <p><span data-i18n="foot.req">Реквизиты</span>: <span data-i18n="foot.bin">БИН</span> <span class="tbd" data-i18n="tbd">уточнить</span></p>
+      </div>
+      <div>
+        <h4 data-i18n="foot.company">Компания</h4>
+        <ul>
+          <li><a href="#about" data-i18n="nav.about">О компании</a></li>
+          <li><a href="#about" data-i18n="nav.quality">Качество и сертификаты</a></li>
+          <li><a href="#about" data-i18n="nav.hse">Экология и безопасность</a></li>
+          <li><a href="#news" data-i18n="nav.news">Пресс-центр</a></li>
+          <li><a href="#about" data-i18n="nav.career">Карьера</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 data-i18n="foot.clients">Клиентам</h4>
+        <ul>
+          <li><a href="#products" data-i18n="nav.products">Продукция</a></li>
+          <li><a href="#services" data-i18n="nav.services">Услуги</a></li>
+          <li><a href="#about" data-i18n="nav.procurement">Закупки</a></li>
+          <li><a href="#faq" data-i18n="nav.faq">FAQ</a></li>
+          <li><a href="#contacts" data-i18n="nav.contacts">Контакты</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 data-i18n="nav.contacts">Контакты</h4>
+        <ul>
+          <li data-i18n="c.addrv">г. Атырау</li>
+          <li><span data-i18n="c.phone2">Телефон</span>: <span class="tbd" data-i18n="tbd">уточнить</span></li>
+          <li>Email: <span class="tbd" data-i18n="tbd">уточнить</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© <span id="year">2026</span> <span data-i18n="foot.rights">ТОО «АНПЗ». Все права защищены.</span></span>
+      <a href="#top" data-i18n="foot.privacy">Политика конфиденциальности</a>
+    </div>
+  </div>
+</footer>
+
+<div class="quick" aria-label="Quick contact">
+  <a class="tel" href="tel:+70000000000" aria-label="Call" data-i18n-attr="aria-label:q.call"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg></a>
+  <a class="wa" href="#contacts" aria-label="WhatsApp"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 21l2-5.4A8.4 8.4 0 1 1 21 11.5z"/></svg></a>
+</div>
+
+<div class="cookie" id="cookie" role="dialog" aria-live="polite">
+  <span data-i18n="cookie.text">Мы используем cookie, чтобы сайт работал корректно. Аналитические cookie включаются только с вашего согласия.</span>
+  <div class="row">
+    <button class="btn btn-primary" data-cookie="all" data-i18n="cookie.accept">Принять все</button>
+    <button class="btn btn-ghost" data-cookie="necessary" data-i18n="cookie.decline">Только необходимые</button>
+  </div>
+</div>
+
+<script>
+const I18N = {
+  ru: {
+    "meta.title": "ТОО «АНПЗ» — надёжный поставщик нефтепродуктов",
+    "meta.desc": "Атырауский нефтеперерабатывающий завод: бензины, дизельное топливо, авиатопливо, СУГ и нефтехимия. Поставки для B2B-клиентов.",
+    "brand.sub": "Атырауский НПЗ",
+    "nav.about": "О компании", "nav.products": "Продукция", "nav.services": "Услуги", "nav.advantages": "Преимущества",
+    "nav.news": "Пресс-центр", "nav.faq": "FAQ", "nav.contacts": "Контакты", "nav.quality": "Качество и сертификаты",
+    "nav.hse": "Экология и безопасность", "nav.career": "Карьера", "nav.procurement": "Закупки",
+    "cta.request": "Оставить заявку", "cta.catalog": "Каталог продукции", "cta.price": "Запросить цену",
+    "hero.badge": "Экологический класс К4/К5",
+    "hero.title": "Надёжный поставщик нефтепродуктов в Казахстане",
+    "hero.sub": "Переработка нефти по стандартам К4/К5. Поставки для B2B-клиентов.",
+    "stats.u1": "млн т", "stats.l1": "мощность переработки нефти в год", "stats.l2": "глубина переработки",
+    "stats.l3": "лет работы (с 1945 года)", "stats.l4": "видов продукции",
+    "stats.note": "* Показатели предварительные и подлежат уточнению у заказчика.",
+    "about.eyebrow": "О компании",
+    "about.title": "Один из ключевых нефтеперерабатывающих заводов Казахстана",
+    "about.text": "ТОО «АНПЗ» перерабатывает нефть и выпускает моторное топливо, сжиженный газ и нефтехимическую продукцию. Модернизированные установки глубокой переработки позволяют производить топливо экологических классов К4/К5.",
+    "about.li1": "Миссия и ценности: безопасность, качество, ответственность",
+    "about.li2": "История завода: от запуска до модернизации",
+    "about.li3": "Производственные мощности и технологические установки",
+    "about.link": "Подробнее о компании →", "about.photo": "Фото завода — заглушка",
+    "products.eyebrow": "Продукция", "products.title": "Каталог нефтепродуктов",
+    "products.sub": "Продукция соответствует ГОСТ и СТ РК. На каждую партию выдаётся паспорт качества.",
+    "products.price": "Цены на сайте не публикуются: стоимость определяется договором и рыночными условиями.",
+    "p1.name": "Автомобильные бензины", "p1.desc": "Высокооктановые бензины для легкового и коммерческого транспорта.",
+    "p2.name": "Дизельное топливо", "p2.t1": "Летнее", "p2.t2": "Межсезонное", "p2.t3": "Зимнее",
+    "p2.desc": "Для грузового транспорта, спецтехники и сельского хозяйства в любой сезон.",
+    "p3.name": "Авиатопливо", "p3.t1": "Реактивное топливо", "p3.desc": "Топливо для реактивных двигателей гражданской авиации.",
+    "p4.name": "Сжиженный углеводородный газ", "p4.t1": "Пропан", "p4.t2": "Пропан-бутан",
+    "p4.desc": "Для коммунально-бытовых нужд, автотранспорта и промышленности.",
+    "p5.name": "Нефтехимия", "p5.t1": "Бензол", "p5.t2": "Параксилол",
+    "p5.desc": "Ароматические углеводороды — сырьё для химической промышленности.",
+    "p6.name": "Прочая продукция", "p6.t1": "Нефтяной кокс", "p6.t2": "Сера", "p6.t3": "Мазут", "p6.t4": "Вакуумный газойль",
+    "p6.desc": "Сопутствующие продукты переработки для промышленных потребителей.",
+    "services.eyebrow": "Услуги", "services.title": "Переработка давальческого сырья",
+    "services.sub": "Для нефтедобывающих компаний — полный цикл: от приёма сырья до отгрузки готовой продукции.",
+    "s1.t": "Процессинг нефти", "s1.d": "Переработка давальческой нефти на мощностях завода по согласованной схеме.",
+    "s2.t": "Хранение", "s2.d": "Резервуарный парк для хранения сырья и готовых нефтепродуктов.",
+    "s3.t": "Отгрузка", "s3.d": "Отгрузка железнодорожным и автомобильным транспортом.",
+    "adv.eyebrow": "Преимущества", "adv.title": "Почему с нами работают",
+    "adv.sub": "Пять причин выбрать ТОО «АНПЗ» как долгосрочного партнёра.",
+    "a1.t": "Современное производство", "a1.d": "Модернизированные установки глубокой переработки.",
+    "a2.t": "Экологичное топливо", "a2.d": "Продукция экологических классов К4/К5.",
+    "a3.t": "Стабильные объёмы", "a3.d": "Бесперебойные поставки по долгосрочным договорам.",
+    "a4.t": "Контроль качества", "a4.d": "Аккредитованная лаборатория, паспорт на каждую партию.",
+    "a5.t": "Логистика", "a5.d": "Собственная инфраструктура отгрузки.",
+    "partners.eyebrow": "Партнёры", "partners.title": "Нам доверяют", "partners.logo": "Логотип",
+    "partners.note": "Логотипы партнёров и кейсы публикуются только с согласия клиентов.",
+    "news.eyebrow": "Пресс-центр", "news.title": "Последние новости",
+    "news.sub": "Новости завода, экология и раскрытие информации.", "news.all": "Все новости →",
+    "n.cat1": "Производство", "n.cat2": "Экология", "n.cat3": "Закупки",
+    "n.t1": "Заголовок новости (наполняется из CMS)", "n.d": "Краткий анонс новости — 1–2 предложения.", "n.more": "Читать далее →",
+    "faq.title": "Частые вопросы",
+    "q1": "Как заключить договор на поставку нефтепродуктов?",
+    "a1": "Оставьте заявку через форму на сайте. Коммерческий отдел свяжется с вами, запросит пакет документов и согласует условия поставки.",
+    "q2": "Какие минимальные объёмы поставки?",
+    "a2": "Минимальный объём зависит от вида продукции и способа отгрузки. Уточните его у коммерческого отдела.",
+    "q3": "Где получить паспорт качества продукции?",
+    "a3": "Паспорт качества выдаётся на каждую партию. Образцы паспортов доступны в разделе «Качество и сертификаты».",
+    "q4": "Какие способы отгрузки доступны?", "a4": "Железнодорожный и автомобильный транспорт.",
+    "q5": "Принимаете ли нефть на давальческую переработку?",
+    "a5": "Да. Условия процессинга обсуждаются индивидуально — выберите в форме услугу «Переработка давальческого сырья».",
+    "q6": "Как стать поставщиком завода и участвовать в закупках?",
+    "a6": "Закупки проводятся через закупочную площадку. Требования к поставщикам опубликованы в разделе «Закупки».",
+    "q7": "Как быстро обрабатывается заявка?", "a7": "Мы связываемся с вами в течение 1 рабочего дня после получения заявки.",
+    "form.eyebrow": "Заявка", "form.title": "Оставьте B2B-заявку",
+    "form.sub": "Укажите продукт и ориентировочный объём — коммерческий отдел подготовит предложение.",
+    "c.addr": "Адрес", "c.addrv": "г. Атырау", "c.phone": "Приёмная / коммерческий отдел", "c.phone2": "Телефон",
+    "c.msg": "Мессенджеры", "c.map": "Интерактивная карта (2GIS / Яндекс Карты)", "tbd": "уточнить",
+    "f.company": "Название компании", "f.bin": "БИН", "f.person": "Контактное лицо", "f.phone": "Телефон",
+    "f.product": "Продукт / услуга", "f.volume": "Ориентировочный объём (т/мес)", "f.comment": "Комментарий",
+    "f.consent": "Я согласен на обработку персональных данных в соответствии с политикой конфиденциальности",
+    "f.submit": "Отправить заявку", "f.success": "Спасибо! Мы свяжемся с вами в течение 1 рабочего дня.",
+    "o.choose": "— Выберите —",
+    "e.required": "Заполните поле", "e.bin": "БИН должен состоять из 12 цифр", "e.phone": "Введите номер полностью",
+    "e.email": "Введите корректный email", "e.select": "Выберите вариант", "e.consent": "Необходимо согласие",
+    "foot.about": "ТОО «Атырауский нефтеперерабатывающий завод» — переработка нефти и выпуск нефтепродуктов.",
+    "foot.req": "Реквизиты", "foot.bin": "БИН", "foot.company": "Компания", "foot.clients": "Клиентам",
+    "foot.rights": "ТОО «АНПЗ». Все права защищены.", "foot.privacy": "Политика конфиденциальности",
+    "cookie.text": "Мы используем cookie, чтобы сайт работал корректно. Аналитические cookie включаются только с вашего согласия.",
+    "cookie.accept": "Принять все", "cookie.decline": "Только необходимые", "q.call": "Позвонить"
+  },
+  kk: {
+    "meta.title": "«АМӨЗ» ЖШС — мұнай өнімдерінің сенімді жеткізушісі",
+    "meta.desc": "Атырау мұнай өңдеу зауыты: бензиндер, дизель отыны, авиаотын, СКГ және мұнай-химия. B2B-клиенттерге жеткізу.",
+    "brand.sub": "Атырау МӨЗ",
+    "nav.about": "Компания туралы", "nav.products": "Өнімдер", "nav.services": "Қызметтер", "nav.advantages": "Артықшылықтар",
+    "nav.news": "Баспасөз орталығы", "nav.faq": "Сұрақтар", "nav.contacts": "Байланыс", "nav.quality": "Сапа және сертификаттар",
+    "nav.hse": "Экология және қауіпсіздік", "nav.career": "Мансап", "nav.procurement": "Сатып алу",
+    "cta.request": "Өтінім қалдыру", "cta.catalog": "Өнімдер каталогы", "cta.price": "Бағасын сұрау",
+    "hero.badge": "К4/К5 экологиялық класы",
+    "hero.title": "Қазақстандағы мұнай өнімдерінің сенімді жеткізушісі",
+    "hero.sub": "К4/К5 стандарттары бойынша мұнай өңдеу. B2B-клиенттерге жеткізу.",
+    "stats.u1": "млн т", "stats.l1": "жылдық мұнай өңдеу қуаты", "stats.l2": "өңдеу тереңдігі",
+    "stats.l3": "жыл жұмыс (1945 жылдан бері)", "stats.l4": "өнім түрі",
+    "stats.note": "* Көрсеткіштер алдын ала берілген және тапсырыс берушімен нақтыланады.",
+    "about.eyebrow": "Компания туралы",
+    "about.title": "Қазақстанның негізгі мұнай өңдеу зауыттарының бірі",
+    "about.text": "«АМӨЗ» ЖШС мұнай өңдейді және мотор отынын, сұйытылған газ бен мұнай-химия өнімдерін шығарады. Терең өңдеудің жаңғыртылған қондырғылары К4/К5 экологиялық класындағы отын өндіруге мүмкіндік береді.",
+    "about.li1": "Миссия және құндылықтар: қауіпсіздік, сапа, жауапкершілік",
+    "about.li2": "Зауыт тарихы: іске қосылғаннан жаңғыртуға дейін",
+    "about.li3": "Өндірістік қуаттар және технологиялық қондырғылар",
+    "about.link": "Компания туралы толығырақ →", "about.photo": "Зауыт фотосы — уақытша сурет",
+    "products.eyebrow": "Өнімдер", "products.title": "Мұнай өнімдерінің каталогы",
+    "products.sub": "Өнімдер МЕМСТ және ҚР СТ талаптарына сәйкес келеді. Әр партияға сапа паспорты беріледі.",
+    "products.price": "Бағалар сайтта жарияланбайды: құны шартпен және нарық жағдайымен анықталады.",
+    "p1.name": "Автомобиль бензиндері", "p1.desc": "Жеңіл және коммерциялық көлікке арналған жоғары октанды бензиндер.",
+    "p2.name": "Дизель отыны", "p2.t1": "Жазғы", "p2.t2": "Маусымаралық", "p2.t3": "Қысқы",
+    "p2.desc": "Жүк көлігіне, арнайы техникаға және ауыл шаруашылығына кез келген маусымда.",
+    "p3.name": "Авиаотын", "p3.t1": "Реактивті отын", "p3.desc": "Азаматтық авиацияның реактивті қозғалтқыштарына арналған отын.",
+    "p4.name": "Сұйытылған көмірсутек газы", "p4.t1": "Пропан", "p4.t2": "Пропан-бутан",
+    "p4.desc": "Коммуналдық-тұрмыстық қажеттіліктерге, автокөлікке және өнеркәсіпке арналған.",
+    "p5.name": "Мұнай-химия", "p5.t1": "Бензол", "p5.t2": "Параксилол",
+    "p5.desc": "Хош иісті көмірсутектер — химия өнеркәсібіне арналған шикізат.",
+    "p6.name": "Басқа өнімдер", "p6.t1": "Мұнай коксы", "p6.t2": "Күкірт", "p6.t3": "Мазут", "p6.t4": "Вакуумдық газойль",
+    "p6.desc": "Өнеркәсіптік тұтынушыларға арналған ілеспе өңдеу өнімдері.",
+    "services.eyebrow": "Қызметтер", "services.title": "Давальческий шикізатты өңдеу",
+    "services.sub": "Мұнай өндіруші компаниялар үшін толық цикл: шикізатты қабылдаудан дайын өнімді тиеуге дейін.",
+    "s1.t": "Мұнай процессингі", "s1.d": "Давальческий мұнайды зауыт қуаттарында келісілген схема бойынша өңдеу.",
+    "s2.t": "Сақтау", "s2.d": "Шикізат пен дайын мұнай өнімдерін сақтауға арналған резервуар паркі.",
+    "s3.t": "Тиеп жөнелту", "s3.d": "Темір жол және автомобиль көлігімен тиеп жөнелту.",
+    "adv.eyebrow": "Артықшылықтар", "adv.title": "Бізбен неге жұмыс істейді",
+    "adv.sub": "«АМӨЗ» ЖШС-ті ұзақ мерзімді серіктес ретінде таңдаудың бес себебі.",
+    "a1.t": "Заманауи өндіріс", "a1.d": "Терең өңдеудің жаңғыртылған қондырғылары.",
+    "a2.t": "Экологиялық отын", "a2.d": "К4/К5 экологиялық класындағы өнімдер.",
+    "a3.t": "Тұрақты көлемдер", "a3.d": "Ұзақ мерзімді шарттар бойынша үздіксіз жеткізу.",
+    "a4.t": "Сапаны бақылау", "a4.d": "Аккредиттелген зертхана, әр партияға паспорт.",
+    "a5.t": "Логистика", "a5.d": "Тиеп жөнелтудің меншікті инфрақұрылымы.",
+    "partners.eyebrow": "Серіктестер", "partners.title": "Бізге сенеді", "partners.logo": "Логотип",
+    "partners.note": "Серіктестердің логотиптері мен кейстері тек клиенттердің келісімімен жарияланады.",
+    "news.eyebrow": "Баспасөз орталығы", "news.title": "Соңғы жаңалықтар",
+    "news.sub": "Зауыт жаңалықтары, экология және ақпаратты ашу.", "news.all": "Барлық жаңалықтар →",
+    "n.cat1": "Өндіріс", "n.cat2": "Экология", "n.cat3": "Сатып алу",
+    "n.t1": "Жаңалық тақырыбы (CMS-тен толтырылады)", "n.d": "Жаңалықтың қысқаша анонсы — 1–2 сөйлем.", "n.more": "Толығырақ →",
+    "faq.title": "Жиі қойылатын сұрақтар",
+    "q1": "Мұнай өнімдерін жеткізуге шартты қалай жасасуға болады?",
+    "a1": "Сайттағы форма арқылы өтінім қалдырыңыз. Коммерциялық бөлім сізбен байланысып, құжаттар пакетін сұратады және жеткізу шарттарын келіседі.",
+    "q2": "Жеткізудің ең аз көлемі қандай?",
+    "a2": "Ең аз көлем өнім түріне және тиеп жөнелту тәсіліне байланысты. Оны коммерциялық бөлімнен нақтылаңыз.",
+    "q3": "Өнімнің сапа паспортын қайдан алуға болады?",
+    "a3": "Сапа паспорты әр партияға беріледі. Паспорт үлгілері «Сапа және сертификаттар» бөлімінде қолжетімді.",
+    "q4": "Тиеп жөнелтудің қандай тәсілдері бар?", "a4": "Темір жол және автомобиль көлігі.",
+    "q5": "Мұнайды давальческий өңдеуге қабылдайсыздар ма?",
+    "a5": "Иә. Процессинг шарттары жеке талқыланады — формада «Давальческий шикізатты өңдеу» қызметін таңдаңыз.",
+    "q6": "Зауыттың жеткізушісі болып, сатып алуға қалай қатысуға болады?",
+    "a6": "Сатып алу сатып алу алаңы арқылы жүргізіледі. Жеткізушілерге қойылатын талаптар «Сатып алу» бөлімінде жарияланған.",
+    "q7": "Өтінім қаншалықты жылдам өңделеді?", "a7": "Өтінімді алғаннан кейін 1 жұмыс күні ішінде сізбен байланысамыз.",
+    "form.eyebrow": "Өтінім", "form.title": "B2B-өтінім қалдырыңыз",
+    "form.sub": "Өнімді және болжамды көлемді көрсетіңіз — коммерциялық бөлім ұсыныс дайындайды.",
+    "c.addr": "Мекенжай", "c.addrv": "Атырау қ.", "c.phone": "Қабылдау бөлмесі / коммерциялық бөлім", "c.phone2": "Телефон",
+    "c.msg": "Мессенджерлер", "c.map": "Интерактивті карта (2GIS / Яндекс Карталар)", "tbd": "нақтылау қажет",
+    "f.company": "Компания атауы", "f.bin": "БСН", "f.person": "Байланыс тұлғасы", "f.phone": "Телефон",
+    "f.product": "Өнім / қызмет", "f.volume": "Болжамды көлем (т/ай)", "f.comment": "Түсініктеме",
+    "f.consent": "Құпиялылық саясатына сәйкес дербес деректерімді өңдеуге келісемін",
+    "f.submit": "Өтінімді жіберу", "f.success": "Рақмет! Біз сізбен 1 жұмыс күні ішінде байланысамыз.",
+    "o.choose": "— Таңдаңыз —",
+    "e.required": "Өрісті толтырыңыз", "e.bin": "БСН 12 цифрдан тұруы керек", "e.phone": "Нөмірді толық енгізіңіз",
+    "e.email": "Дұрыс email енгізіңіз", "e.select": "Нұсқаны таңдаңыз", "e.consent": "Келісім қажет",
+    "foot.about": "«Атырау мұнай өңдеу зауыты» ЖШС — мұнай өңдеу және мұнай өнімдерін шығару.",
+    "foot.req": "Деректемелер", "foot.bin": "БСН", "foot.company": "Компания", "foot.clients": "Клиенттерге",
+    "foot.rights": "«АМӨЗ» ЖШС. Барлық құқықтар қорғалған.", "foot.privacy": "Құпиялылық саясаты",
+    "cookie.text": "Сайттың дұрыс жұмыс істеуі үшін cookie файлдарын пайдаланамыз. Аналитикалық cookie тек сіздің келісіміңізбен қосылады.",
+    "cookie.accept": "Барлығын қабылдау", "cookie.decline": "Тек қажеттілері", "q.call": "Қоңырау шалу"
+  },
+  en: {
+    "meta.title": "Atyrau Refinery LLP — a reliable supplier of petroleum products",
+    "meta.desc": "Atyrau Oil Refinery: gasoline, diesel, jet fuel, LPG and petrochemicals. Supplies for B2B customers.",
+    "brand.sub": "Atyrau Refinery",
+    "nav.about": "About", "nav.products": "Products", "nav.services": "Services", "nav.advantages": "Advantages",
+    "nav.news": "Press center", "nav.faq": "FAQ", "nav.contacts": "Contacts", "nav.quality": "Quality & certificates",
+    "nav.hse": "Environment & safety (HSE)", "nav.career": "Careers", "nav.procurement": "Procurement",
+    "cta.request": "Submit a request", "cta.catalog": "Product catalog", "cta.price": "Request a price",
+    "hero.badge": "K4/K5 environmental class",
+    "hero.title": "A reliable supplier of petroleum products in Kazakhstan",
+    "hero.sub": "Oil refining to K4/K5 standards. Supplies for B2B customers.",
+    "stats.u1": "mln t", "stats.l1": "annual crude oil refining capacity", "stats.l2": "refining depth",
+    "stats.l3": "years in operation (since 1945)", "stats.l4": "product types",
+    "stats.note": "* Figures are preliminary and subject to confirmation by the client.",
+    "about.eyebrow": "About the company",
+    "about.title": "One of Kazakhstan's key oil refineries",
+    "about.text": "Atyrau Refinery LLP processes crude oil and produces motor fuels, liquefied gas and petrochemicals. Modernized deep conversion units enable production of K4/K5 environmental class fuels.",
+    "about.li1": "Mission and values: safety, quality, responsibility",
+    "about.li2": "Refinery history: from launch to modernization",
+    "about.li3": "Production capacity and process units",
+    "about.link": "More about the company →", "about.photo": "Refinery photo — placeholder",
+    "products.eyebrow": "Products", "products.title": "Petroleum product catalog",
+    "products.sub": "Products comply with GOST and ST RK standards. Every batch comes with a quality certificate.",
+    "products.price": "Prices are not published on the website: they are set by contract and market conditions.",
+    "p1.name": "Motor gasoline", "p1.desc": "High-octane gasoline for passenger and commercial vehicles.",
+    "p2.name": "Diesel fuel", "p2.t1": "Summer", "p2.t2": "Off-season", "p2.t3": "Winter",
+    "p2.desc": "For trucks, heavy machinery and agriculture in any season.",
+    "p3.name": "Aviation fuel", "p3.t1": "Jet fuel", "p3.desc": "Fuel for civil aviation jet engines.",
+    "p4.name": "Liquefied petroleum gas", "p4.t1": "Propane", "p4.t2": "Propane-butane",
+    "p4.desc": "For household and municipal use, vehicles and industry.",
+    "p5.name": "Petrochemicals", "p5.t1": "Benzene", "p5.t2": "Paraxylene",
+    "p5.desc": "Aromatic hydrocarbons — feedstock for the chemical industry.",
+    "p6.name": "Other products", "p6.t1": "Petroleum coke", "p6.t2": "Sulfur", "p6.t3": "Fuel oil", "p6.t4": "Vacuum gas oil",
+    "p6.desc": "Refining by-products for industrial consumers.",
+    "services.eyebrow": "Services", "services.title": "Tolling (processing of customer-owned crude)",
+    "services.sub": "For oil producers — a full cycle from crude intake to shipment of finished products.",
+    "s1.t": "Crude processing", "s1.d": "Processing of customer-owned crude at the refinery under an agreed scheme.",
+    "s2.t": "Storage", "s2.d": "Tank farm for storing crude and finished petroleum products.",
+    "s3.t": "Shipment", "s3.d": "Shipment by rail and road.",
+    "adv.eyebrow": "Advantages", "adv.title": "Why customers work with us",
+    "adv.sub": "Five reasons to choose Atyrau Refinery as a long-term partner.",
+    "a1.t": "Modern production", "a1.d": "Modernized deep conversion units.",
+    "a2.t": "Cleaner fuel", "a2.d": "Products of K4/K5 environmental classes.",
+    "a3.t": "Stable volumes", "a3.d": "Uninterrupted supply under long-term contracts.",
+    "a4.t": "Quality control", "a4.d": "Accredited laboratory, a certificate for every batch.",
+    "a5.t": "Logistics", "a5.d": "Own shipping infrastructure.",
+    "partners.eyebrow": "Partners", "partners.title": "Trusted by", "partners.logo": "Logo",
+    "partners.note": "Partner logos and case studies are published only with the customers' consent.",
+    "news.eyebrow": "Press center", "news.title": "Latest news",
+    "news.sub": "Refinery news, environment and disclosures.", "news.all": "All news →",
+    "n.cat1": "Production", "n.cat2": "Environment", "n.cat3": "Procurement",
+    "n.t1": "News headline (populated from the CMS)", "n.d": "Short news teaser — 1–2 sentences.", "n.more": "Read more →",
+    "faq.title": "Frequently asked questions",
+    "q1": "How do I sign a petroleum product supply contract?",
+    "a1": "Submit a request via the form on the website. The sales department will contact you, request the required documents and agree on supply terms.",
+    "q2": "What are the minimum supply volumes?",
+    "a2": "The minimum volume depends on the product and the shipping method. Please check with the sales department.",
+    "q3": "Where can I get a product quality certificate?",
+    "a3": "A quality certificate is issued for every batch. Sample certificates are available in the Quality & certificates section.",
+    "q4": "What shipping methods are available?", "a4": "Rail and road transport.",
+    "q5": "Do you accept crude oil for tolling?",
+    "a5": "Yes. Processing terms are discussed individually — select the Tolling service in the form.",
+    "q6": "How can I become a supplier and take part in tenders?",
+    "a6": "Procurement is carried out via the procurement platform. Supplier requirements are published in the Procurement section.",
+    "q7": "How quickly is a request processed?", "a7": "We contact you within 1 business day after receiving your request.",
+    "form.eyebrow": "Request", "form.title": "Submit a B2B request",
+    "form.sub": "Specify the product and estimated volume — our sales department will prepare an offer.",
+    "c.addr": "Address", "c.addrv": "Atyrau", "c.phone": "Reception / sales department", "c.phone2": "Phone",
+    "c.msg": "Messengers", "c.map": "Interactive map (2GIS / Yandex Maps)", "tbd": "to be confirmed",
+    "f.company": "Company name", "f.bin": "BIN", "f.person": "Contact person", "f.phone": "Phone",
+    "f.product": "Product / service", "f.volume": "Estimated volume (t/month)", "f.comment": "Comment",
+    "f.consent": "I consent to the processing of my personal data in accordance with the privacy policy",
+    "f.submit": "Send request", "f.success": "Thank you! We will contact you within 1 business day.",
+    "o.choose": "— Select —",
+    "e.required": "This field is required", "e.bin": "BIN must contain 12 digits", "e.phone": "Enter the full number",
+    "e.email": "Enter a valid email", "e.select": "Select an option", "e.consent": "Consent is required",
+    "foot.about": "Atyrau Oil Refinery LLP — crude oil refining and production of petroleum products.",
+    "foot.req": "Company details", "foot.bin": "BIN", "foot.company": "Company", "foot.clients": "For customers",
+    "foot.rights": "Atyrau Refinery LLP. All rights reserved.", "foot.privacy": "Privacy policy",
+    "cookie.text": "We use cookies to make the website work properly. Analytics cookies are enabled only with your consent.",
+    "cookie.accept": "Accept all", "cookie.decline": "Necessary only", "q.call": "Call"
+  }
+};
+
+const store = {
+  get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
+  set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+};
+
+function setLang(lang) {
+  const dict = I18N[lang] || I18N.ru;
+  document.documentElement.lang = lang;
+  document.querySelectorAll("[data-i18n]").forEach(el => {
+    const v = dict[el.dataset.i18n];
+    if (v != null) el.textContent = v;
+  });
+  document.querySelectorAll("[data-i18n-attr]").forEach(el => {
+    const [attr, key] = el.dataset.i18nAttr.split(":");
+    if (dict[key] != null) el.setAttribute(attr, dict[key]);
+  });
+  document.querySelectorAll(".lang button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.lang === lang)));
+  store.set("lang", lang);
+}
+
+document.querySelectorAll(".lang button").forEach(b => b.addEventListener("click", () => setLang(b.dataset.lang)));
+setLang(store.get("lang") || "ru");
+document.getElementById("year").textContent = new Date().getFullYear();
+
+// Mobile menu
+const burger = document.getElementById("burger"), nav = document.getElementById("nav");
+burger.addEventListener("click", () => {
+  const open = nav.classList.toggle("open");
+  burger.setAttribute("aria-expanded", String(open));
+});
+nav.querySelectorAll("a").forEach(a => a.addEventListener("click", () => {
+  nav.classList.remove("open"); burger.setAttribute("aria-expanded", "false");
+}));
+
+// Reveal + counters
+const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+function runCounter(el) {
+  const to = parseFloat(el.dataset.to), dec = +(el.dataset.dec || 0);
+  const sep = () => document.documentElement.lang === "en" ? "." : ",";
+  if (reduce) { el.textContent = to.toFixed(dec).replace(".", sep()); return; }
+  const t0 = performance.now(), dur = 1400;
+  (function tick(t) {
+    const p = Math.min(1, (t - t0) / dur), v = to * (1 - Math.pow(1 - p, 3));
+    el.textContent = v.toFixed(dec).replace(".", sep());
+    if (p < 1) requestAnimationFrame(tick);
+  })(t0);
+}
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    e.target.classList.add("in");
+    e.target.querySelectorAll(".count").forEach(runCounter);
+    io.unobserve(e.target);
+  });
+}, { threshold: 0.15 });
+document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+
+// "Request a price" preselects the product
+document.querySelectorAll("[data-product]").forEach(a => a.addEventListener("click", () => {
+  document.getElementById("f-product").value = a.dataset.product;
+}));
+
+// Phone mask +7 (___) ___-__-__
+const phone = document.getElementById("f-phone");
+phone.addEventListener("input", () => {
+  let d = phone.value.replace(/\D/g, "");
+  if (d.startsWith("8") || d.startsWith("7")) d = d.slice(1);
+  d = d.slice(0, 10);
+  let out = "+7";
+  if (d.length) out += " (" + d.slice(0, 3);
+  if (d.length >= 3) out += ")";
+  if (d.length > 3) out += " " + d.slice(3, 6);
+  if (d.length > 6) out += "-" + d.slice(6, 8);
+  if (d.length > 8) out += "-" + d.slice(8, 10);
+  phone.value = d.length ? out : "";
+});
+const bin = document.getElementById("f-bin");
+bin.addEventListener("input", () => { bin.value = bin.value.replace(/\D/g, "").slice(0, 12); });
+
+// Form validation
+const form = document.getElementById("reqForm");
+function check(id, ok) {
+  const field = document.getElementById(id).closest(".field");
+  field.classList.toggle("invalid", !ok);
+  return ok;
+}
+form.addEventListener("submit", e => {
+  e.preventDefault();
+  if (form.website.value) return; // honeypot
+  const v = n => form[n].value.trim();
+  const results = [
+    check("f-company", !!v("company")),
+    check("f-bin", !v("bin") || /^\d{12}$/.test(v("bin"))),
+    check("f-person", !!v("person")),
+    check("f-phone", phone.value.replace(/\D/g, "").length === 11),
+    check("f-email", /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v("email"))),
+    check("f-product", !!v("product")),
+    check("f-consent", form.consent.checked)
+  ];
+  if (results.includes(false)) {
+    form.querySelector(".invalid input, .invalid select")?.focus();
+    return;
+  }
+  // TODO: отправка на API (email коммерческого отдела / CRM)
+  document.getElementById("success").classList.add("show");
+  form.querySelectorAll("input:not([type=checkbox]), select, textarea").forEach(el => el.value = "");
+  form.consent.checked = false;
+});
+form.addEventListener("input", e => e.target.closest(".field")?.classList.remove("invalid"));
+
+// Cookie banner
+const cookie = document.getElementById("cookie");
+if (!store.get("cookie")) cookie.classList.add("show");
+cookie.querySelectorAll("[data-cookie]").forEach(b => b.addEventListener("click", () => {
+  store.set("cookie", b.dataset.cookie);
+  cookie.classList.remove("show");
+}));
+</script>
+</body>
+</html>
